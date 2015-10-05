@@ -45,7 +45,7 @@ namespace Account_Manager
                     }
                 }
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 return false;
             }

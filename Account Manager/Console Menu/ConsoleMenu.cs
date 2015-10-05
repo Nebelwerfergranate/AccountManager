@@ -49,19 +49,19 @@ namespace Account_Manager
                 switch (userCommands[0].ToUpper())
                 {
                     case "SELECT":
-                        Select.PrintSelected(userCommands);
+                        InformUser(Select.GetSelectedToString(accounts, userCommands));
                         break;
                     case "ADD":
-                        Add.AddNewAccount(userCommands);
+                        InformUser(Add.AddNewAccount(accounts, userCommands));
                         break;
                     case "UPDATE":
-                        Update.UpdateAccountInfo(userCommands);
+                        InformUser(Update.UpdateAccountInfo(accounts, userCommands));
                         break;
                     case "DELETE":
-                        Delete.DeleteAccount(userCommands);
+                        InformUser(Delete.DeleteAccount(accounts, userCommands));
                         break;
                     case "EXIT":
-                        Exit.SaveAndExit(userCommands);
+                        Exit.SaveAndExit(accounts, userCommands);
                         break;
                     default: 
                         ErrorMessage(userInput);
@@ -91,7 +91,7 @@ namespace Account_Manager
         private static void PrintHelp()
         {
             Console.WriteLine("Для управления каталогами используйте следующие команды");
-            Console.WriteLine("\tSELECT id или SELECT * или SELECT(id, id, id)");
+            Console.WriteLine("\tSELECT id или SELECT");
             Console.WriteLine("\tADD (), ()");
             Console.WriteLine("\tDELETE id");
             Console.WriteLine("\tUPDATE id SET поле = значение");

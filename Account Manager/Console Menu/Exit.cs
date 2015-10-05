@@ -7,7 +7,7 @@ namespace Account_Manager
 {
     public static class Exit
     {
-        public static void SaveAndExit(List<String> userCommands)
+        public static void SaveAndExit(Dictionary<uint, Account> accounts, List<String> userCommands)
         {
             ConsoleMenu.InformUser("Работа программы завершена");
             Environment.Exit(1);
