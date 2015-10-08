@@ -41,14 +41,14 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Account.cs" />
-    <Compile Include="AccountTable.cs" />
-    <Compile Include="AccountBinFormatter.cs" />
-    <Compile Include="AccountXmlSerializer.cs" />
+    <Compile Include="Account Manager\Account.cs" />
+    <Compile Include="Account Manager\AccountTable.cs" />
+    <Compile Include="Account Manager\AccountBinFormatter.cs" />
+    <Compile Include="Account Manager\AccountXmlSerializer.cs" />
     <Compile Include="Delegates\MessageDelegate.cs" />
     <Compile Include="Interfaces\IDbOperations.cs" />
     <Compile Include="Console Menu\Add.cs" />
-    <Compile Include="Config.cs" />
+    <Compile Include="Account Manager\Config.cs" />
     <Compile Include="Console Menu\ConsoleMenu.cs" />
     <Compile Include="Console Menu\Delete.cs" />
     <Compile Include="Console Menu\Exit.cs" />
