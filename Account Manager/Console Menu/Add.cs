@@ -1,19 +1,19 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Text.RegularExpressions;
 
 namespace Account_Manager
 {
-    public static class Add
+    public class Add : Operation
     {
-        public static string AddNewAccount(Dictionary<uint, Account> accounts, List<String> userCommands)
+        public void AddNewAccount(List<String> userCommands)
         {
             int accountsAdded = 0;
 
             if (userCommands.Count < 2)
             {
-                return "Информация о новом каталоге не указана";
+                SendMessage("Информация о новом каталоге не указана");
+                return;
             }
 
             userCommands.RemoveAt(0);
@@ -37,8 +37,7 @@ namespace Account_Manager
                 {
                     try
                     {
-                        uint max = accounts.Keys.Max();
-                        Account account = new Account(max + 1);
+                        Account account = new Account();
                         account.FirstName = fields.Groups[1].Value;
                         account.LastName = fields.Groups[2].Value;
                         if (fields.Groups[3].Value == "")
@@ -60,19 +59,20 @@ namespace Account_Manager
                             account.Salary = UInt32.Parse(fields.Groups[6].Value);
                         }
 
-                        accounts.Add(max + 1, account);
+                        ConsoleMenu.AccountTable.Add(account);
                         accountsAdded++;
                     }
                     catch (Exception)
                     {
                         // Это сообщение выводиться не должно.
-                        return "Ошибка парсинга строк.";
+                        SendMessage("Ошибка парсинга строк.");
+                        return;
                     }
                     fields = fields.NextMatch();
                 }
                 inBrackets = inBrackets.NextMatch();
             }
-            return "Добавлено " + accountsAdded + " каталогов.";
+            SendMessage("Добавлено " + accountsAdded + " каталогов.");
         }
     }
 }

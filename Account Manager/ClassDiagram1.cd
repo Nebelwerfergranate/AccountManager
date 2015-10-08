@@ -1,39 +1,97 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <ClassDiagram MajorVersion="1" MinorVersion="1">
   <Class Name="Account_Manager.Select">
-    <Position X="1" Y="1" Width="1.5" />
+    <Position X="8" Y="11.25" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
-      <FileName>Select.cs</FileName>
+      <HashCode>AAAAAAAAAAAAAAAIAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Console Menu\Select.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="Account_Manager.Add">
-    <Position X="3.25" Y="1" Width="1.5" />
+    <Position X="10" Y="11.25" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
-      <FileName>Add.cs</FileName>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAAAAAAAA=</HashCode>
+      <FileName>Console Menu\Add.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="Account_Manager.Update">
-    <Position X="5.5" Y="1.25" Width="1.5" />
+    <Position X="14" Y="11.25" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
-      <FileName>Update.cs</FileName>
+      <HashCode>AACAAAAAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Console Menu\Update.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="Account_Manager.Delete">
-    <Position X="2.25" Y="3.25" Width="1.5" />
+    <Position X="12" Y="11.25" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
-      <FileName>Delete.cs</FileName>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAAAAA=</HashCode>
+      <FileName>Console Menu\Delete.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="Account_Manager.Exit">
-    <Position X="5.5" Y="3.5" Width="1.5" />
+    <Position X="16" Y="11.25" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
-      <FileName>Exit.cs</FileName>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABAAAAAAAAAA=</HashCode>
+      <FileName>Console Menu\Exit.cs</FileName>
     </TypeIdentifier>
   </Class>
+  <Class Name="Account_Manager.Operation">
+    <Position X="12" Y="9.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAACAAAAAAAAAAAAAAAACAAAAAAAA=</HashCode>
+      <FileName>Console Menu\Operation.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Account_Manager.AccountTable">
+    <Position X="8" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAICAMAAIACAAAAAAAAAAAAAAIAAAAAAAgBAAUAAAAA=</HashCode>
+      <FileName>AccountTable.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Account_Manager.Console_Menu.AccountBinFormatter">
+    <Position X="0.5" Y="6.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAEAAAAAAAIAAAACAAAgAAAAAAAAAAAAAAEAAAA=</HashCode>
+      <FileName>AccountBinFormatter.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="Account_Manager.AccountXmlSerializer">
+    <Position X="4.25" Y="6.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAIAAAAAIAAAACAAAgAAAAAAAAAAAAAAEAAAA=</HashCode>
+      <FileName>AccountXmlSerializer.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="Account_Manager.ConsoleMenu">
+    <Position X="12" Y="5.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AQAAAAAAACAAAAAAAAJQAQAAEAAAAABAAAAAACAGAAA=</HashCode>
+      <FileName>Console Menu\ConsoleMenu.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Account_Manager.Config">
+    <Position X="2.25" Y="2.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAIEAAACAAAAACCQAAAAAAAAAAAAIAAAIAAAA=</HashCode>
+      <FileName>Config.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Interface Name="Account_Manager.IDbOperations">
+    <Position X="0.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAIAAAAAAAAgAAAAAAAAAAAAAAEAAAA=</HashCode>
+      <FileName>Interfaces\IDbOperations.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Delegate Name="Account_Manager.MessageDelegate">
+    <Position X="12" Y="4.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAACAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Delegates\MessageDelegate.cs</FileName>
+    </TypeIdentifier>
+  </Delegate>
   <Font Name="Segoe UI" Size="9" />
 </ClassDiagram>

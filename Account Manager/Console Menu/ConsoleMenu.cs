@@ -1,36 +1,44 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Configuration;
-using System.Linq;
-using System.Runtime.CompilerServices;
-using System.Text;
-using System.Threading.Tasks;
-using System.Xml;
 
 namespace Account_Manager
 {
-    public static class ConsoleMenu
+    public class ConsoleMenu
     {
         // Fields
-        private static Dictionary<uint, Account> accounts; 
+        private readonly Add add = new Add();
+        private readonly Delete delete = new Delete();
+        private readonly Select select = new Select();
+        private readonly Update update = new Update();
+        private readonly Exit exit = new Exit();
 
+        private static AccountTable accountTable;
+
+
+        // Constructors
+        public ConsoleMenu(AccountTable accounts)
+        {
+            accountTable = accounts;
+            accountTable.OnError += InformUser;
+
+            add.OnMessage += InformUser;
+            delete.OnMessage += InformUser;
+            select.OnMessage += InformUser;
+            update.OnMessage += InformUser;
+            exit.OnMessage += InformUser;
+        }
+
+
+        // Properties
+        public static AccountTable AccountTable
+        {
+            get { return accountTable; }
+        }
 
 
         // Methods
-        public static void Start(Dictionary<uint, Account> accountsFromMain)
+        public void Start()
         {
-            accounts = accountsFromMain;
-            if (Config.Init())
-            {
-                //InformUser(String.Format("format: {0}", Config.Format));
-                //InformUser(String.Format("path: {0}", Config.Path));
-            }
-            else
-            {
-                InformUser("Конфигурационный файл config.xml не найден или составлен некорректно.");
-                return;
-            }
-
             while (true)
             {
                 Console.Clear();
@@ -49,28 +57,28 @@ namespace Account_Manager
                 switch (userCommands[0].ToUpper())
                 {
                     case "SELECT":
-                        InformUser(Select.GetSelectedToString(accounts, userCommands));
+                        select.GetSelected(userCommands);
                         break;
                     case "ADD":
-                        InformUser(Add.AddNewAccount(accounts, userCommands));
+                        add.AddNewAccount(userCommands);
                         break;
                     case "UPDATE":
-                        InformUser(Update.UpdateAccountInfo(accounts, userCommands));
+                        update.UpdateAccountInfo(userCommands);
                         break;
                     case "DELETE":
-                        InformUser(Delete.DeleteAccount(accounts, userCommands));
+                        delete.DeleteAccount(userCommands);
                         break;
                     case "EXIT":
-                        Exit.SaveAndExit(accounts, userCommands);
+                        exit.SaveAndExit();
                         break;
-                    default: 
+                    default:
                         ErrorMessage(userInput);
                         break;
                 }
             }
         }
 
-        public static void InformUser(string msg = "")
+        private static void InformUser(string msg = "")
         {
             if (msg.Length != 0)
             {
@@ -80,7 +88,7 @@ namespace Account_Manager
             Console.ReadKey();
         }
 
-        public static void ErrorMessage(string userInput)
+        private static void ErrorMessage(string userInput)
         {
             Console.WriteLine();
             PrintHelp();
@@ -91,10 +99,18 @@ namespace Account_Manager
         private static void PrintHelp()
         {
             Console.WriteLine("Для управления каталогами используйте следующие команды");
-            Console.WriteLine("\tSELECT id или SELECT");
-            Console.WriteLine("\tADD (), ()");
+            Console.WriteLine("\tSELECT id или SELECT *");
+            Console.WriteLine("\tADD ('FirstName','LastName','Age','Position','Email','Salary'), " +
+                              "('','','','','','') ...");
             Console.WriteLine("\tDELETE id");
             Console.WriteLine("\tUPDATE id SET поле = значение");
+            Console.WriteLine("\tПоля: ");
+            Console.WriteLine("\t\tFirstName");
+            Console.WriteLine("\t\tLastName");
+            Console.WriteLine("\t\tAge");
+            Console.WriteLine("\t\tPosition");
+            Console.WriteLine("\t\tEmail");
+            Console.WriteLine("\t\tSalary");
             Console.WriteLine("\tEXIT");
         }
     }

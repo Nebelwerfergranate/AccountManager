@@ -1,64 +1,113 @@
 ﻿using System;
+using System.IO;
 using System.Xml;
+using Account_Manager.Console_Menu;
 
 namespace Account_Manager
 {
-    public static class Config
+    public class Config
     {
         // Fields
-        private static string format = "";
-        private static string path = "";
+        private string format = "";
+        private string defaultFormat = "xml";
+
+        private string path = "";
+        private string defaultPath = "default.xml";
+
+        private string configPath = "config.xml";
+
+        private IDbOperations serializer;
+
+
+        // Constructors
+        public Config()
+        {
+            CreateSerializer();
+        }
 
 
         // Properties
-        public static string Format
+        public IDbOperations Serializer
         {
-            get { return format; }
-        }
-
-        public static string Path
-        {
-            get { return path; }
+            get { return serializer; }
         }
 
 
         // Methods
-        public static bool Init()
+        private void CreateSerializer()
         {
-            string configPath = "config.xml";
-            XmlDocument config = new XmlDocument();
+            XmlDocument xmlDocument = new XmlDocument();
+            if (!File.Exists(configPath))
+            {
+                XmlElement formatElement = xmlDocument.CreateElement("format");
+                formatElement.InnerText = defaultFormat;
+
+                XmlElement pathElement = xmlDocument.CreateElement("path");
+                pathElement.InnerText = defaultPath;
+
+                XmlElement configElement = xmlDocument.CreateElement("config");
+                configElement.AppendChild(formatElement);
+                configElement.AppendChild(pathElement);
+                xmlDocument.AppendChild(configElement);
+                xmlDocument.Save(configPath);
+            }
             try
             {
-                config.Load(configPath);
-                foreach (XmlNode node in config.SelectNodes("config"))
+                xmlDocument.Load(configPath);
+                foreach (XmlNode node in xmlDocument.SelectNodes("config"))
                 {
                     foreach (XmlNode child in node.ChildNodes)
                     {
                         if (child.Name == "format")
                         {
-                            format = child.InnerText;
+                            if (child.InnerText == "bin" || child.InnerText == "binary")
+                            {
+                                format = "binary";
+                            }
+                            else if (child.InnerText == "xml")
+                            {
+                                format = "xml";
+                            }
+                            else
+                            {
+                                throw new ApplicationException("Формат " + child.InnerText + " программой " +
+                                                               "не поддерживается.");
+                            }
                         }
+
                         else if (child.Name == "path")
                         {
-                            path = child.InnerText;
+                            if (child.InnerText != "")
+                            {
+                                path = child.InnerText;
+                            }
+                            else
+                            {
+                                throw new ApplicationException("В файле конфигурации не указан путь.");
+                            }
                         }
                     }
                 }
             }
-            catch (Exception)
+            catch (Exception exception)
             {
-                return false;
+                if (exception is ApplicationException)
+                {
+                    throw new ApplicationException(exception.Message);
+                }
+                throw new ApplicationException("Файл конфигурации имеет некорректный формат.");
             }
-
-            if(path!= "" && format!= "")
+            finally
             {
-                return true;
-            }
-            else
-            {
-                return false;
+                if (format == "binary")
+                {
+                    serializer = new AccountBinFormatter(path);
+                }
+                else if (format == "xml")
+                {
+                    serializer = new AccountXmlSerializer(path);
+                }
             }
         }
-        
     }
 }

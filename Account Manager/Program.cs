@@ -11,9 +11,21 @@ namespace Account_Manager
 
         private static void Main(string[] args)
         {
-            Dictionary<uint, Account> accounts = new Dictionary<uint, Account>(); 
+            AccountTable accounts = null;
+            try
+            {
+                accounts = new AccountTable();
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                Console.ReadKey();
+                return;
+            }
+
             Test.AddAccounts(accounts);
-            ConsoleMenu.Start(accounts);
+            ConsoleMenu menu = new ConsoleMenu(accounts);
+            menu.Start();
         }
     }
 }

@@ -1,33 +1,32 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 
 namespace Account_Manager
 {
-    public static class Select
+    public class Select : Operation
     {
-        public static string GetSelectedToString(Dictionary<uint, Account> accounts, List<String> userCommands)
+        public void GetSelected(List<String> userCommands)
         {
             string info = "";
 
-            if (accounts.Count == 0)
-            {
-                return "Каталогов не найдено.";
-            }
-
-            info += "Найденные каталоги:\n\n";
             if (userCommands.Count < 2)
             {
-                return "Не указан id каталога для просмотра";
-
+                SendMessage("Не указан id каталога для просмотра");
+                return;
             }
+
             if (userCommands[1] == "*")
             {
-
-                foreach (KeyValuePair<uint, Account> keyValuePair in accounts)
+                if (ConsoleMenu.AccountTable.GetAllAccounts() == null)
                 {
-                    info += keyValuePair.Value.ToString();
+                    SendMessage("Каталогов не найдено.");
+                    return;
+                }
+                Account[] accounts = ConsoleMenu.AccountTable.GetAllAccounts();
+                info += "Найденные каталоги:\n\n";
+                foreach (Account acc in accounts)
+                {
+                    info += acc.ToString();
                     info += "\n";
                 }
             }
@@ -40,18 +39,21 @@ namespace Account_Manager
                 }
                 catch (Exception)
                 {
-                    return "ID каталога указан в некорректном формате";
+                    SendMessage("ID каталога указан в некорректном формате");
+                    return;
                 }
-                if (accounts.ContainsKey(id))
+                if (ConsoleMenu.AccountTable.GetAccount(id) != null)
                 {
-                    info += accounts[id].ToString();
+                    info += "Найденный каталог:\n\n";
+                    info += ConsoleMenu.AccountTable.GetAccount(id).ToString();
                 }
                 else
                 {
-                    return "Каталога с ID " + id + " не найдено";
+                    SendMessage("Каталога с ID " + id + " не найдено");
+                    return;
                 }
             }
-            return info;
+            SendMessage(info);
         }
     }
 }

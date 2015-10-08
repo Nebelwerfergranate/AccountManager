@@ -6,13 +6,14 @@ using System.Text.RegularExpressions;
 
 namespace Account_Manager
 {
-    public static class Update
+    public class Update : Operation
     {
-        public static string UpdateAccountInfo(Dictionary<uint, Account> accountsList, List<String> userCommands)
+        public void UpdateAccountInfo(List<String> userCommands)
         {
             if (userCommands.Count < 4)
             {
-                return "Пропущена одна или несколько команд";
+                SendMessage("Пропущена одна или несколько команд");
+                return;
             }
 
             uint id = 0;
@@ -25,22 +26,25 @@ namespace Account_Manager
             }
             catch (Exception)
             {
-                return "ID каталога указан в некорректном формате";
+                SendMessage("ID каталога указан в некорректном формате");
+                return;
             }
 
-            if (accountsList.ContainsKey(id))
+            if (ConsoleMenu.AccountTable.GetAccount(id) != null)
             {
-                account = accountsList[id];
+                account = ConsoleMenu.AccountTable.GetAccount(id);
             }
             else
             {
-                return "Каталога с указанным ID не существует";
+                SendMessage("Каталога с указанным ID не существует");
+                return;
             }
             
 
             if (userCommands[2].ToUpper() != "SET")
             {
-                return "Пропущено ключевое слово SET";
+                SendMessage("Пропущено ключевое слово SET");
+                return;
             }
 
             userCommands.RemoveRange(0, 3);
@@ -64,7 +68,7 @@ namespace Account_Manager
                     match = match.NextMatch();
                 }
             }
-            return "Обновлено " + fieldsUpdated + " строк.";
+            SendMessage("Обновлено " + fieldsUpdated + " строк.");
         }
 
         private static bool UpdateField(Account account, string field, string newValue )

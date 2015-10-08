@@ -5,11 +5,14 @@ using System.Text;
 
 namespace Account_Manager
 {
-    public static class Exit
+    public class Exit : Operation
     {
-        public static void SaveAndExit(Dictionary<uint, Account> accounts, List<String> userCommands)
+        public void SaveAndExit()
         {
-            ConsoleMenu.InformUser("Работа программы завершена");
+            SendMessage("Работа программы завершена. " +
+                        "Каталоги будут сохранены в файл "
+                        + ConsoleMenu.AccountTable.FilePath);
+            ConsoleMenu.AccountTable.Save();
             Environment.Exit(1);
         }
     }

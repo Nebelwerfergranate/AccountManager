@@ -5,11 +5,12 @@ using System.Text;
 
 namespace Account_Manager
 {
-    public static class Delete
+    public class Delete : Operation
     {
-        public static string DeleteAccount(Dictionary<uint, Account> accounts, List<String> userCommands)
+        public void DeleteAccount(List<String> userCommands)
         {
             string info = "";
+
             uint id = 0;
             try
             {
@@ -17,18 +18,20 @@ namespace Account_Manager
             }
             catch (Exception)
             {
-                return "ID каталога указан в некорректном формате";
+                SendMessage("ID каталога указан в некорректном формате");
+                return;
             }
-            if (accounts.ContainsKey(id))
+
+            if (ConsoleMenu.AccountTable.DeleteAccount(id))
             {
-                accounts.Remove(id);
                 info += "Каталог ID " + id + " удален.";
             }
             else
             {
-                return "Каталога с ID " + id + " не найдено";
+                SendMessage("Каталога с ID " + id + " не найдено");
+                return ;
             }
-            return info;
+            SendMessage(info);
         }
     }
 }

@@ -5,15 +5,13 @@ namespace Account_Manager
     [Serializable]
     public class Account
     {
-        // Fields
-        private uint id;
-
         // Constructors
-        public Account(uint id)
+        public Account()
         {
-            this.id = id;
+
         }
-        public Account(uint id, string firstName, string lastName, byte? age, string position, string email, uint? salary) : this(id)
+
+        public Account(string firstName, string lastName, byte? age, string position, string email, uint? salary)
         {
             FirstName = firstName;
             LastName = lastName;
@@ -25,10 +23,7 @@ namespace Account_Manager
 
 
         // Properties
-        public uint Id
-        {
-            get{ return id; }
-        }
+        public uint Id { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public byte? Age { get; set; }
