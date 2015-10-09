@@ -103,7 +103,7 @@ namespace Account_Manager
             Console.WriteLine("\tADD ('FirstName','LastName','Age','Position','Email','Salary'), " +
                               "('','','','','','') ...");
             Console.WriteLine("\tDELETE id");
-            Console.WriteLine("\tUPDATE id SET поле = значение");
+            Console.WriteLine("\tUPDATE id SET поле = значение, поле = значение");
             Console.WriteLine("\tПоля: ");
             Console.WriteLine("\t\tFirstName");
             Console.WriteLine("\t\tLastName");
